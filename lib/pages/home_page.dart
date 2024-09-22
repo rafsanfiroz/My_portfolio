@@ -10,6 +10,10 @@ import 'package:portfolio/widget/main_desktop.dart';
 import 'package:portfolio/widget/main_mobile.dart';
 import 'package:portfolio/widget/skill_desktop.dart';
 import 'package:portfolio/widget/skill_mobile.dart';
+import 'package:dio/dio.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,6 +25,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final scrollController = ScrollController();
+
+  //final Dio _dio = Dio(); // Initialize Dio
 
   final List<GlobalKey> navbarkeys = List.generate(4, (index) => GlobalKey());
 
@@ -93,12 +99,52 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ), //skill
-              // Container(
-              //   height: 500,
-              //   width: double.maxFinite,
-              // ), //project
+              Container(
+                height: 300,
+                width: double.maxFinite,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      const Expanded(
+                        child: Text(
+                          "My Resume",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                            color: CustomColor.yellowPrimary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      Container(
+                        width: 300,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                          onPressed: _downloadCV,
+                          child: const Text(
+                            "Download CV",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: CustomColor.whiteSecondary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ), //project
               const SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               //contact
               Contact(key: navbarkeys[2]),
@@ -112,6 +158,7 @@ class _HomePageState extends State<HomePage> {
       );
     });
   }
+
   void scrollToSection(int navIndex) {
     if (navIndex == 4) {
       return;
@@ -122,5 +169,24 @@ class _HomePageState extends State<HomePage> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
+  }
+
+  Future<void> _downloadCV() async {
+    const cvUrl =
+        'https://drive.google.com/uc?export=download&id=1m_YsX7D6QY9KQvC5QjeO-0Gt7woGtPBJ'; // Replace with your actual file ID
+
+    final Uri url = Uri.parse(cvUrl);
+
+    // Check if the URL can be launched
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $cvUrl';
+    }
+  }
+
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }

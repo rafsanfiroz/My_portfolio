@@ -32,19 +32,19 @@ class Contact extends StatelessWidget {
       color: CustomColor.bgLight1,
       child: Column(
         children: [
-          Text(
-            "Get in Touch",
+          const Text(
+            "Get In Touch",
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: CustomColor.yellowPrimary,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50.0,
           ),
           ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxWidth: 700,
               maxHeight: 100,
 
@@ -62,22 +62,22 @@ class Contact extends StatelessWidget {
 
             )
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
           ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxWidth: 700,
 
             ),
-            child: CustomTextfield(
+            child: const CustomTextfield(
               hintText: "Your message",
               maxLines: 15,
             ),
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxWidth: 700,
 
             ),
@@ -85,17 +85,17 @@ class Contact extends StatelessWidget {
             child: SizedBox(
                 width: double.maxFinite,
                 child: ElevatedButton(
-                    onPressed: () {}, child: Text('Get in touch',style: TextStyle(color: CustomColor.yellowSecondary),))),
+                    onPressed: () {}, child: const Text('Get in touch',style: TextStyle(color: CustomColor.yellowSecondary),))),
           ),
 
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           ConstrainedBox(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxWidth: 300,
 
               ),
-              child: Divider()),
-          SizedBox(height: 20,),
+              child: const Divider()),
+          const SizedBox(height: 20,),
           Wrap(
             spacing: 12,
             runSpacing: 10,
@@ -112,11 +112,11 @@ class Contact extends StatelessWidget {
                     _launchURL(SnsLinks.linkedIn);
                   },
                   child: Image.asset("assets/images/linkedin.png",width: 28,)),
-              InkWell(
-                  onTap: (){
-                    _launchURL(SnsLinks.facebook);
-                  },
-                  child: Image.asset("assets/images/facebook.png",width: 28,)),
+              // InkWell(
+              //     onTap: (){
+              //       _launchURL(SnsLinks.facebook);
+              //     },
+              //     child: Image.asset("assets/images/facebook.png",width: 28,)),
               // InkWell(
               //     onTap: (){},
               //     child: Image.asset("assets/images/telegram.png",width: 28,)),
@@ -133,7 +133,7 @@ class Contact extends StatelessWidget {
 
   Row buildNameEmailDesktop (){
 
-    return Row(
+    return  Row(
       children: [
         Flexible(
           child: CustomTextfield(
@@ -174,8 +174,5 @@ class Contact extends StatelessWidget {
     );
 
   }
-
-
-
 
 }
